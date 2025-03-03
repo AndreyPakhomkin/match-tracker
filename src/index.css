@@ -1,3 +1,13 @@
+/* Подключение шрифтов */
+@font-face {
+  font-family: 'TacticSans';
+  src: url('./fonts/TacticSans-BlkIt.woff2') format('woff2'),
+    url('./fonts/TacticSans-BlkIt.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
