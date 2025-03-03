@@ -1,6 +1,6 @@
 import React from "react";
-import { Wrap, Title, UpdateGroup } from "./styled/HeaderStyled";
-import { Error, Button } from "./Utils";
+import { Wrap, Title, UpdateGroup } from "../styled/HeaderStyled";
+import { Error, Button } from "./ui";
 
 const Header: React.FC = () => {
     return (

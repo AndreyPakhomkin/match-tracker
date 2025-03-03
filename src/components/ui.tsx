@@ -1,5 +1,5 @@
 import React from "react";
-import { ErrorWrap, Icon, ErrorMessage, Btn, BtnText } from "./styled/UtilsStyled";
+import { ErrorWrap, Icon, ErrorMessage, Btn, BtnText } from "../styled/UtilsStyled";
 
 import errorIcon from '../icons/error-icon.png'
 import refreshIcon from '../icons/refresh-icon.png'
