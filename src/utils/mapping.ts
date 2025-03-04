@@ -14,7 +14,7 @@ export const mapApiDataToMatch = (apiMatch: any): Match => ({
     matchStatus: mapStatus(apiMatch.status)
 });
 
-const mapStatus = (apiStatus: string): "Live" | "Finished" | "Match preparing" => {
+const mapStatus = (apiStatus: string): string => {
     switch (apiStatus) {
         case "Ongoing":
             return "Live";

@@ -1,13 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ErrorI } from '../../types/Error';
 
-interface Error {
-    errorStatus: boolean,
-    errorMessage: string | null,
-    errorType: 'fetchError' | null;
-}
-
-
-const initialState: Error = {
+const initialState: ErrorI = {
     errorStatus: false,
     errorMessage: null,
     errorType: null,

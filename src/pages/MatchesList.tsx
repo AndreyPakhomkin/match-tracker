@@ -1,33 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MatchItem from "../components/MatchItem";
 import { fetchMatches } from "../utils/api";
 import { mapApiDataToMatch } from "../utils/mapping";
-import { Match } from "../types/match";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { putMatches } from "../store/reducers/matchesSlice";
+import { setError } from "../store/reducers/errorSlice";
+import { setLoading } from "../store/reducers/loadingSlice";
 
 const MatchesList: React.FC = () => {
-    const [matches, setMatches] = useState<Match[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const dispatch = useAppDispatch();
+    const matches = useAppSelector(state => state.matches.matches) || [];
+    const loading = useAppSelector(state => state.loading)
 
     useEffect(() => {
         fetchMatches()
-            .then((data) => setMatches(data.map(mapApiDataToMatch)))
-            .catch(() => setError("Ошибка загрузки данных"))
-            .finally(() => setLoading(false));
+            .then((data) => {
+                const transformedData = data.map(mapApiDataToMatch);
+                dispatch(putMatches(transformedData));
+            })
+            .catch(() => dispatch(setError({ errorStatus: true, errorMessage: '', errorType: 'fetchError' })))
+            .finally(() => dispatch(setLoading(false)));
     }, []);
 
     let key = 0;
-    return (
-        <>
-            {matches.map(match => {
-                key++
-                return (
-                    <MatchItem match={match} key={'match' + key} />
-                )
-            })
-            }
-        </>
-    )
+
+    if (!matches || matches.length === 0) {
+        return null
+    } else {
+        return (
+            <>
+                {matches.map(match => {
+                    key++
+                    return (
+                        <MatchItem match={match} key={'match ' + key} />
+                    )
+                })
+                }
+            </>
+        )
+    }
 }
 
 export default MatchesList
